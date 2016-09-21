@@ -35,6 +35,23 @@ class ThreesWords(cmd.Cmd):
         else:
             print "{0} has these answers: {1}".format(arg, matches)
 
+    def do_challenge(self, arg):
+        "Challenge me!"
+        words.monger.formulate_challenge()
+        words.monger.show_challenge()
+
+    def do_claim(self, arg):
+        "Claim to solve a word in the active challenge"
+        result = words.monger.claim(arg)
+        if result:
+            words.monger.show_challenge()
+        else:
+            print "Nope :("
+
+    def do_show(self, arg):
+        "Show the active challenge"
+        words.monger.show_challenge()
+
     def do_exit(self, line):
         "Exit"
         return True
