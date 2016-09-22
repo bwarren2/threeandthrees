@@ -1,10 +1,12 @@
 import cmd
 import words
+from colorama import init, Fore
+init(autoreset=True)
 
 
 class ThreesWords(cmd.Cmd):
 
-    prompt = ">"
+    prompt = Fore.GREEN + ">  "
     intro = "Welcome to the 3&3s game!  Try 'help' (no 's)"
 
     def do_count(self, arg):
@@ -62,5 +64,9 @@ class ThreesWords(cmd.Cmd):
         return True
 
 
-if __name__ == '__main__':
+def main():
     ThreesWords().cmdloop()
+
+
+if __name__ == '__main__':
+    main()

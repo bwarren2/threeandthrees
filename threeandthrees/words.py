@@ -1,25 +1,24 @@
 from collections import defaultdict, OrderedDict
 import random
-from pprint import pprint
+from colorama import init, Fore
+import os
+import re
+
+init(autoreset=True)
+
+safe_pattern = re.compile('^[a-z]{9}$')
 
 
 def extract_words():
-    with open('/usr/share/dict/american-english', 'r') as f:
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    with open(dir_path + '/american-english.txt', 'r') as f:
         raw_data = f.read().split('\n')
         data = list(filter(is_clean, raw_data))
         return data
 
 
 def is_clean(word):
-    if "'" in word:
-        return False
-    if len(word) != 9:
-        return False
-    if '\\x' in word:
-        return False
-    if word.lower() != word:
-        return False
-    return True
+    return re.search(safe_pattern, word) is not None
 
 
 def extract_cores(wordlist):
@@ -59,7 +58,21 @@ class Wordmonger(object):
         return arg in self.coremap[arg[3:6]]
 
     def show_challenge(self):
-        pprint(self.challenge)
+        for idx, (key, value) in enumerate(self.challenge.iteritems(), 1):
+            if value is not None:
+                print(
+                    "{idx}:\t {color}{word}".format(
+                        **{
+                            'idx': idx, 'word': value, 'color': Fore.GREEN
+                        }
+                    )
+                )
+            else:
+                print(
+                    "{idx}:\t ___{core}___".format(
+                        **{'idx': idx, 'core': key}
+                    )
+                )
 
     def formulate_challenge(self, n=10):
         self.challenge = OrderedDict()
