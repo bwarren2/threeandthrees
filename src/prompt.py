@@ -10,30 +10,32 @@ class ThreesWords(cmd.Cmd):
     def do_count(self, arg):
         "Get the number of answers for a three letter core"
         matches = words.monger.answer_count(arg)
-        print "{0} has {1} matches in American english".format(
+        print("{0} has {1} matches in American english".format(
             arg, len(matches)
-        )
+        ))
 
     def do_check(self, arg):
         "Test a word"
         result = words.monger.check(arg)
         if result is True:
-            print "{0} works!".format(arg)
+            print("{0} works!".format(arg))
         else:
-            print "{0} doesn't work :(".format(arg)
+            print("{0} doesn't work :(".format(arg))
 
     def do_generate(self, arg):
         "Get a three letter core"
         core = words.monger.generate()
-        print "Your core is {0}.".format(core)
+        print("Your core is {0}.".format(core))
 
     def do_answers(self, arg):
         "Get the number of answers for a three letter core"
         matches = words.monger.answers(arg)
         if matches is None:
-            print "{0} has no answers in American english".format(arg, matches)
+            print(
+                "{0} has no answers in American english".format(arg, matches)
+            )
         else:
-            print "{0} has these answers: {1}".format(arg, matches)
+            print("{0} has these answers: {1}".format(arg, matches))
 
     def do_challenge(self, arg):
         "Challenge me!"
@@ -46,7 +48,7 @@ class ThreesWords(cmd.Cmd):
         if result:
             words.monger.show_challenge()
         else:
-            print "Nope :("
+            print("Nope :(")
 
     def do_show(self, arg):
         "Show the active challenge"

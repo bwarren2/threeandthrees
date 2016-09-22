@@ -6,7 +6,7 @@ from pprint import pprint
 def extract_words():
     with open('/usr/share/dict/american-english', 'r') as f:
         raw_data = f.read().split('\n')
-        data = filter(is_clean, raw_data)
+        data = list(filter(is_clean, raw_data))
         return data
 
 
@@ -51,7 +51,7 @@ class Wordmonger(object):
         return self.coremap.get(candidate, None)
 
     def generate(self):
-        key = random.choice(self.coremap.keys())
+        key = random.choice(list(self.coremap.keys()))
         return key
         # return self.coremap[key]
 
@@ -64,8 +64,8 @@ class Wordmonger(object):
     def formulate_challenge(self, n=10):
         self.challenge = OrderedDict()
         while n > 0:
-            new_core = random.choice(self.coremap.keys())
-            if new_core not in self.challenge.keys():
+            new_core = random.choice(list(self.coremap.keys()))
+            if new_core not in list(self.challenge.keys()):
                 self.challenge[new_core] = None
                 n -= 1
 
@@ -73,7 +73,7 @@ class Wordmonger(object):
         key = answer[3:6]
         if (
             answer in self.coremap[key]
-            and key in self.challenge.keys()
+            and key in list(self.challenge.keys())
         ):
             self.challenge[key] = answer
             return True
