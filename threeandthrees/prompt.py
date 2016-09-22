@@ -12,8 +12,13 @@ class ThreesWords(cmd.Cmd):
     def do_count(self, arg):
         "Get the number of answers for a three letter core"
         matches = words.monger.answer_count(arg)
+        if matches is None:
+            ct = 0
+        else:
+            ct = matches
+
         print("{0} has {1} matches in American english".format(
-            arg, len(matches)
+            arg, ct
         ))
 
     def do_check(self, arg):

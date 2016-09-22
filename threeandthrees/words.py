@@ -44,7 +44,7 @@ class Wordmonger(object):
         if value is None:
             return 0
         else:
-            return value
+            return len(value)
 
     def answers(self, candidate):
         return self.coremap.get(candidate, None)

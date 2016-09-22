@@ -5,7 +5,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='threeandthrees',
-    version='1.0.0',
+    version='1.0.1',
     description='A CLI 3&3s game',
     long_description='Play a word game against the words file.',
     author='Ben Warren',
