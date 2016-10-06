@@ -1,7 +1,7 @@
 *.sublime-*
 __pycache__
 .cache
-.pyc
+*.pyc
 .tox
 dist/
 *.egg-info
