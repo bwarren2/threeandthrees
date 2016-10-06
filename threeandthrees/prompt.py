@@ -35,7 +35,7 @@ class ThreesWords(cmd.Cmd):
         print("Your core is {0}.".format(core))
 
     def do_answers(self, arg):
-        "Get the number of answers for a three letter core"
+        "Get the answers for a three letter core"
         matches = words.monger.answers(arg)
         if matches is None:
             print(
@@ -65,8 +65,33 @@ class ThreesWords(cmd.Cmd):
         "Exit"
         return True
 
+    def do_quit(self, line):
+        "Exit"
+        return True
+
     def do_EOF(self, line):
         return True
+
+    def do_help(self, line):
+        "Instructions on all commands"
+        print("""
+Challenge commands:
+    challenge : take a challenge
+    claim <nine letters> : assert an answer in the challenge
+    show : show the challenge
+
+Cheating commands:
+    check <nine letters> : check if that is a word
+    count <three letters> : number of answers for a three letter sequence
+    answers <three letters> : get the answers for a three letter sequence
+
+Challenge commands:
+    help : show this
+    exit : exit
+    quit : exit
+
+
+        """)
 
 
 def main():
